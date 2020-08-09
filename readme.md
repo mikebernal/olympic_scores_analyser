@@ -27,19 +27,16 @@ alphabetical order.
 4. Below the list of medal winning countries, we also want a list of Athletes who
 have set a world record (and for what sport).
 
-### To do
+### To Do (priority)
 
-1. Validate form data
-2. Tally all countries
-3. Sort by number of medals
+1. Validate form data (required, minimum characters, date format, data types.
+2. Sort by number of medals
+3. Display Athletes who set a world record.
 
-### Nice to have:
+### To Do (final):
 
-1. Add competitor button
-2. Add select tag for medal(G - gold, S - silver, B - bronze)
-3. Add select tag for world record(Y - Yes, N - No)
-4. Display only the submit button if competitor row is more than 1.
-
+1. Add unique ID
+2. Add edit functionality
 
 ##### Author: Mike Bernal
 ##### Repo: github.com/mikebernal/olympic_scores_analyser
