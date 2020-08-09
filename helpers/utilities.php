@@ -9,6 +9,7 @@
 
   function validateInput($input) {
     if (empty($input)) {
+      header('Location: '.$_SERVER['PHP_SELF']);
       exit;
     } 
     return sanitizeInput($input);

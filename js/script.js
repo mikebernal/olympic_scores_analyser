@@ -104,11 +104,11 @@ function addCompetitor(index) {
   tr.appendChild(remove);
 
   competitors.push({
-    'id':          competitors.length,
-    'name':        document.forms[0].elements[4].value,
-    'country':     document.forms[0].elements[5].value,
-    'event':       document.forms[0].elements[6].value,
-    'medal':       document.forms[0].elements[7].value,
+    'id':           competitors.length,
+    'name':         document.forms[0].elements[4].value,
+    'country':      document.forms[0].elements[5].value,
+    'event':        document.forms[0].elements[6].value,
+    'medal':        document.forms[0].elements[7].value,
     'world-record': document.forms[0].elements[8].value
   });
 

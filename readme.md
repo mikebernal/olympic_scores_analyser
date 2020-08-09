@@ -27,13 +27,18 @@ alphabetical order.
 4. Below the list of medal winning countries, we also want a list of Athletes who
 have set a world record (and for what sport).
 
-### To Do (priority)
+### To Do (priority) MERGE ALL TO MASTER
 
 1. Validate form data (required, minimum characters, date format, data types.
 2. Sort by number of medals
 3. Display Athletes who set a world record.
 
-### To Do (final):
+### To do to close branch (method-post branch)
+
+1. Redirect to index page with prefilled input field on validation error.
+2. Return to index page relevant error details.
+
+### To Do (final): AFTER MASTER MERGE
 
 1. Add unique ID
 2. Add edit functionality
