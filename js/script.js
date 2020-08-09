@@ -154,16 +154,3 @@ function payloadUpdate() {
   payloadRequest.value = JSON.stringify(competitors);
   // console.log(payloadRequest.value);
 }
-
-// POST Data to result.php
-// function postData() {
-//   const competitorList  = JSON.stringify(competitors);
-//   const xmlhttp         = new XMLHttpRequest();
-
-//   xmlhttp.open('POST', 'result.php');
-//   xmlhttp.setRequestHeader('Content-type', 'application/json');
-//   xmlhttp.send(competitorList)
-
-//   redirect();
-  
-// }
