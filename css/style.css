@@ -1,0 +1,115 @@
+/* Resets */
+*::before,
+*::after,
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+body {
+  background: none;
+  position: relative;
+  min-width: 320px;
+  line-height: 1.2;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Modules */
+
+tr, th, td {
+  border: 1px solid black;
+  padding: .5em;
+}
+.competitor-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background: none;
+}
+
+.competitors-div {
+  display: none;
+}
+
+.submit {
+  display: none;
+}
+
+.cols {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: lighter;
+  margin-bottom: 8px;
+}
+
+.button {
+  margin: .5em  1em;
+  padding: .5em 1.5em;
+  border: 1px solid black;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:active, .action-button:active {
+  background: black;
+  color: white;
+}
+
+.p2 {
+  padding: .5em 1.5em;
+  margin: 1em 0;
+}
+
+/* Helpers */
+.t-center {
+  text-align: center;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+tr:first-of-type, tr:first-of-type:hover {
+  background: none;
+}
+tr:hover {
+  background: rgb(255, 250, 205);
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
