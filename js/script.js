@@ -1,6 +1,5 @@
 // GLOBAL VARIABELS
  competitors = [];
-
 /**
  * GET COUNTRIES
  * Invoked after DOMContentLoaded event.
@@ -110,17 +109,23 @@ function addCompetitor(index) {
     'country':     document.forms[0].elements[5].value,
     'event':       document.forms[0].elements[6].value,
     'medal':       document.forms[0].elements[7].value,
-    'worldRecord': document.forms[0].elements[8].value
+    'world-record': document.forms[0].elements[8].value
   });
 
   // Display to dom
-  console.log(competitors)
+  // console.log(competitors)
   // console.log(competitors.length)
 
   // Reset input fields
-  document.forms[0].reset();
+  // document.forms[0].reset();
+  document.forms[0].elements[4].value = "";
+  document.forms[0].elements[5].value = "";
+  document.forms[0].elements[6].value = "";
+  document.forms[0].elements[7].value = "";
+  document.forms[0].elements[8].value = "";
   updateTable();
   renderSubmitBtn();
+  payloadUpdate()
 }
 
 // To do
@@ -141,5 +146,24 @@ function removeCompetitor(index) {
   rowToRemove.remove();
   updateTable();
   renderSubmitBtn();
-
+  payloadUpdate()
 }
+
+function payloadUpdate() {
+  var payloadRequest = document.querySelector('.competitor-list');
+  payloadRequest.value = JSON.stringify(competitors);
+  // console.log(payloadRequest.value);
+}
+
+// POST Data to result.php
+// function postData() {
+//   const competitorList  = JSON.stringify(competitors);
+//   const xmlhttp         = new XMLHttpRequest();
+
+//   xmlhttp.open('POST', 'result.php');
+//   xmlhttp.setRequestHeader('Content-type', 'application/json');
+//   xmlhttp.send(competitorList)
+
+//   redirect();
+  
+// }

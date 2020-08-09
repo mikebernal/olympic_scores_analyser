@@ -1,3 +1,5 @@
+<?php require_once('helpers/initialize.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +17,7 @@
 
     <main>
       <!-- Olympic analyzer form -->
-      <form method="post" action="result.php">
+      <form name="olympic" method="post" action="views/result.php">
 
         <!-- Year -->
         <label class="label" for="year">Year of Games</label> 
@@ -87,8 +89,6 @@
           </div>
 
         </div>
-
-      </form>  
     </main>
 
     <!-- Preview table -->
@@ -109,8 +109,13 @@
 
       <!-- Submit button -->
       <div class="submit">
-        <button class="button p2" disabled>Submit</button>
+        <button class="button p2">Submit</button>
+        <!-- <button class="button p2" onclick="postData()">Submit</button> -->
       </div>
+
+      <input type="hidden" name="competitorList" class="competitor-list">
+
+    </form>  
 
   </div>
 
