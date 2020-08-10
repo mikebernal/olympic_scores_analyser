@@ -1,5 +1,4 @@
 <?php
-
   class Util {
 
     static public $invalidFields = array();
@@ -13,10 +12,10 @@
 
     static public function validate($input) {
       if (empty($input)) {
-        // self::redirect("../");exit;
         array_push(self::$invalidFields, $input);
-      } 
-      return self::sanitize($input);
+      } else {
+        self::sanitize($input);
+      }
     }
 
     // To do: add error msg
