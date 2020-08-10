@@ -104,7 +104,6 @@ function addCompetitor(index) {
   tr.appendChild(medal);
   tr.appendChild(worldRecord);
   tr.classList.add('row' + index);
-  // edit delete
   tr.appendChild(edit);
   tr.appendChild(remove);
 
@@ -117,8 +116,7 @@ function addCompetitor(index) {
     'world-record': document.forms[0].elements[8].value
   });
 
-  // Reset input fields
-  // document.forms[0].reset();
+  // Reset competitor's input fields
   document.forms[0].elements[4].value = '';
   document.forms[0].elements[5].value = '';
   document.forms[0].elements[6].value = '';
@@ -128,13 +126,11 @@ function addCompetitor(index) {
   updateTable();
   renderSubmitBtn();
   payloadUpdate()
-
-  console.log(competitors);
 }
 
 // To do
 function editCompetitor(index) {
-  alert('the index is: ' + index);
+  alert('competitor\'s ID to edit: ' + index);
   // update dom
 }
 

@@ -3,12 +3,21 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Initialization
+  // IValidate input fields
   $year         = Util::validate($_POST["year"]);
   $city         = Util::validate($_POST["city"]);
   $commenceDate = Util::validate($_POST["commence-date"]);
   $endDate      = Util::validate($_POST["end-date"]);
   $competitors  = json_decode($_POST["competitorList"], true);
+
+  foreach($competitors as $competitor) {
+    Util::validate($competitor['name']);
+    Util::validate($competitor['country']);
+    Util::validate($competitor['medal']);
+    Util::validate($competitor['world-record']);
+  }
+
+  if (empty(Util::$invalidFields)) {
 ?>
 
 <!DOCTYPE html>
@@ -34,10 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php
         foreach($competitors as $competitor) {
           echo "<tr>";
-          echo "<td>" . Util::validate($competitor['name'])         . "</td>";
-          echo "<td>" . Util::validate($competitor['country'])      . "</td>";
-          echo "<td>" . Util::validate($competitor['medal'])        . "</td>";
-          echo "<td>" . Util::validate($competitor['world-record']) . "</td>";
+          echo "<td>" . $competitor['name']         . "</td>";
+          echo "<td>" . $competitor['country']      . "</td>";
+          echo "<td>" . $competitor['medal']        . "</td>";
+          echo "<td>" . $competitor['world-record'] . "</td>";
           echo "</tr>";
         }
       ?>
@@ -76,7 +85,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </html>
 
 <?php
+  // Has invalid input fields
+  } else {
+    Util::redirect("../");
+  }
+?>
 
+<?php
+  // Return to index if not POST
 } else {
     Util::redirect("index.php");
 }
