@@ -39,8 +39,7 @@ have set a world record (and for what sport).
 
 ### TO DO (FINAL): AFTER MASTER MERGE
 
-1. Fix unique ID
-2. Add edit functionality
+1. Add edit functionality
 
 ##### Author: Mike Bernal
 ##### Repo: github.com/mikebernal/olympic_scores_analyser

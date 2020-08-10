@@ -1,6 +1,7 @@
 <?php
   class Util {
 
+    static public $counter = 0;
     static public $invalidFields = array();
 
     static public function sanitize($input) {

@@ -1,4 +1,5 @@
 // GLOBAL VARIABELS
+var i = 0;
 var competitors = [];
 /**
  * GET COUNTRIES
@@ -50,7 +51,11 @@ var competitors = [];
     .catch(function() { return console.log('Can’t access ' + events + ' response. Blocked by browser?'); })
 })();
 
-
+document.querySelector('.addBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  addCompetitor(i);
+  i += 1;
+})
 function updateTable() {
   return ((competitors.length > 0)
             ? (
@@ -98,13 +103,13 @@ function addCompetitor(index) {
   tr.appendChild(event);
   tr.appendChild(medal);
   tr.appendChild(worldRecord);
-  tr.classList.add('row' + competitors.length);
+  tr.classList.add('row' + index);
   // edit delete
   tr.appendChild(edit);
   tr.appendChild(remove);
 
   competitors.push({
-    'id':           competitors.length,
+    'id':           index,
     'name':         document.forms[0].elements[4].value,
     'country':      document.forms[0].elements[5].value,
     'event':        document.forms[0].elements[6].value,
@@ -123,6 +128,8 @@ function addCompetitor(index) {
   updateTable();
   renderSubmitBtn();
   payloadUpdate()
+
+  console.log(competitors);
 }
 
 // To do

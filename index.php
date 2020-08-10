@@ -80,7 +80,7 @@
           </div>
 
           <!-- Add button -->
-          <div class="button unselectable" onclick="addCompetitor(competitors.length)">
+          <div class="button unselectable addBtn">
             <span name="add" class="button__add">Add</span>
           </div>
 
