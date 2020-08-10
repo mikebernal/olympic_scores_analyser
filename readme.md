@@ -36,6 +36,7 @@ have set a world record (and for what sport).
 ### TO DO: METHOD-POST BRANCH
 
 1. Redirect to index page with relevant error and prefilled input fields on validation error.
+1.1. Use sessions in every pages and add session variables as a default input fields and labels for the predefined data and error values.
 
 ### TO DO (FINAL): AFTER MASTER MERGE
 
