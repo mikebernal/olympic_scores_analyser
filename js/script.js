@@ -1,5 +1,5 @@
 // GLOBAL VARIABELS
- competitors = [];
+var competitors = [];
 /**
  * GET COUNTRIES
  * Invoked after DOMContentLoaded event.
@@ -47,7 +47,7 @@
         }
       );
     })
-    .catch(function() { return console.log("Can’t access " + events + " response. Blocked by browser?"); })
+    .catch(function() { return console.log('Can’t access ' + events + ' response. Blocked by browser?'); })
 })();
 
 
@@ -112,17 +112,14 @@ function addCompetitor(index) {
     'world-record': document.forms[0].elements[8].value
   });
 
-  // Display to dom
-  // console.log(competitors)
-  // console.log(competitors.length)
-
   // Reset input fields
   // document.forms[0].reset();
-  document.forms[0].elements[4].value = "";
-  document.forms[0].elements[5].value = "";
-  document.forms[0].elements[6].value = "";
-  document.forms[0].elements[7].value = "";
-  document.forms[0].elements[8].value = "";
+  document.forms[0].elements[4].value = '';
+  document.forms[0].elements[5].value = '';
+  document.forms[0].elements[6].value = '';
+  document.forms[0].elements[7].value = '';
+  document.forms[0].elements[8].value = '';
+
   updateTable();
   renderSubmitBtn();
   payloadUpdate()
@@ -130,7 +127,7 @@ function addCompetitor(index) {
 
 // To do
 function editCompetitor(index) {
-  alert("the index is: " + index);
+  alert('the index is: ' + index);
   // update dom
 }
 

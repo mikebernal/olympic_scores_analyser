@@ -18,12 +18,9 @@
     }
 
     public function getCompetitor($id) {}
-
-    public function getAllCompetitors() {}
-
-    public function setCompetitor($id) {}
-
-    public function sortCompetitor() {}
+    
+    public function setCompetitor($id, $name, $country, $event, $medal, $worldRecord) {}
 
   }
+  
 ?>

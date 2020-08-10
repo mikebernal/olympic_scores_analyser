@@ -39,11 +39,17 @@ tr, th, td {
   border: 1px solid black;
   padding: .5em;
 }
+
 .competitor-data {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   background: none;
+  margin-top: 2em;
+}
+
+.heading {
+  margin-bottom: 1em;
 }
 
 .competitors-div {
@@ -52,11 +58,6 @@ tr, th, td {
 
 .submit {
   display: none;
-}
-
-.cols {
-  display: flex;
-  flex-direction: column;
 }
 
 .label {
@@ -80,12 +81,12 @@ tr, th, td {
   color: white;
 }
 
-.p2 {
-  padding: .5em 1.5em;
-  margin: 1em 0;
+/* Helpers */
+.cols {
+  display: flex;
+  flex-direction: column;
 }
 
-/* Helpers */
 .t-center {
   text-align: center;
 }
@@ -97,6 +98,7 @@ tr, th, td {
 tr:first-of-type, tr:first-of-type:hover {
   background: none;
 }
+
 tr:hover {
   background: rgb(255, 250, 205);
 }
@@ -112,4 +114,9 @@ tr:hover {
 
 .pointer {
   cursor: pointer;
+}
+
+.p2 {
+  padding: .5em 1.5em;
+  margin: 1em 0;
 }

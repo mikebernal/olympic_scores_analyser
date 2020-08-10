@@ -1,14 +1,14 @@
-<?php include('../helpers/utilities.php'); ?>
+<?php include("../models/Util.php"); ?>
 
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Initialization
-  $year         = validateInput($_POST['year']);
-  $city         = validateInput($_POST['city']);
-  $commenceDate = validateInput($_POST['commence-date']);
-  $endDate      = validateInput($_POST['end-date']);
-  $competitors  = json_decode($_POST['competitorList'], true);
+  $year         = Util::validate($_POST["year"]);
+  $city         = Util::validate($_POST["city"]);
+  $commenceDate = Util::validate($_POST["commence-date"]);
+  $endDate      = Util::validate($_POST["end-date"]);
+  $competitors  = json_decode($_POST["competitorList"], true);
 ?>
 
 <!DOCTYPE html>
@@ -34,10 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php
         foreach($competitors as $competitor) {
           echo "<tr>";
-          echo "<td>" . validateInput($competitor['name']) . "</td>";
-          echo "<td>" . validateInput($competitor['country']) . "</td>";
-          echo "<td>" . validateInput($competitor['medal']) . "</td>";
-          echo "<td>" . validateInput($competitor['world-record']) . "</td>";
+          echo "<td>" . Util::validate($competitor['name']) . "</td>";
+          echo "<td>" . Util::validate($competitor['country']) . "</td>";
+          echo "<td>" . Util::validate($competitor['medal']) . "</td>";
+          echo "<td>" . Util::validate($competitor['world-record']) . "</td>";
           echo "</tr>";
         }
       ?>
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 
 } else {
-  header("Location: ../index.php");
+    Util::redirect("index.php");
 }
 
 ?>

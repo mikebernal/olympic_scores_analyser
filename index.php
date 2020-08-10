@@ -1,5 +1,3 @@
-<?php require_once('helpers/initialize.php'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +10,7 @@
   <div class="container">
     
     <header>
-      <h1>Olympic Scores Analyser</h1>
+      <h1 class="heading">Olympic Scores Analyser</h1>
     </header>
 
     <main>
@@ -21,24 +19,22 @@
 
         <!-- Year -->
         <label class="label" for="year">Year of Games</label> 
-        <input name="year" type="text" class="input year" size="4" maxlength="4"><br />
+        <input name="year" type="text" class="input year" size="4" maxlength="4">
 
         <!-- City -->
         <label class="label" for="city">City of Games</label>
-        <input name="city" type="text" class="input city" size="40" maxlength="40"><br />
+        <input name="city" type="text" class="input city" size="40" maxlength="40">
         
         <!-- Commence date -->
         <label class="label" for="commence-date">Commence Date</label>
-        <input name="commence-date" type="text" class="input commence-date" size="10" maxlength="10"><br />
+        <input name="commence-date" type="text" class="input commence-date" size="10" maxlength="10">
         
         <!-- End date -->
         <label class="label" for="end-date">End Date</label>
         <input name="end-date" type="text" class="input end-date" size="10" maxlength="10">
 
-        <br><br><hr><br>
-
         <!-- Dynamic input data -->
-        <div class="competitor-data justify-center">
+        <div class="competitor-data">
           <!-- Competitor -->
           <div class="cols">
             <label class="label" for="competitor">Competitor Name</label>
@@ -110,7 +106,6 @@
       <!-- Submit button -->
       <div class="submit">
         <button class="button p2">Submit</button>
-        <!-- <button class="button p2" onclick="postData()">Submit</button> -->
       </div>
 
       <input type="hidden" name="competitorList" class="competitor-list">
