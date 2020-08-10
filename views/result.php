@@ -34,9 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php
         foreach($competitors as $competitor) {
           echo "<tr>";
-          echo "<td>" . Util::validate($competitor['name']) . "</td>";
-          echo "<td>" . Util::validate($competitor['country']) . "</td>";
-          echo "<td>" . Util::validate($competitor['medal']) . "</td>";
+          echo "<td>" . Util::validate($competitor['name'])         . "</td>";
+          echo "<td>" . Util::validate($competitor['country'])      . "</td>";
+          echo "<td>" . Util::validate($competitor['medal'])        . "</td>";
           echo "<td>" . Util::validate($competitor['world-record']) . "</td>";
           echo "</tr>";
         }
@@ -68,6 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="end-date-value value"><?php echo $endDate;?></div>
         </div>
 
+        <!-- Invalid fields -->
+        <?php print_r(Util::$invalidFields); ?>
     </div>
   </div>
 </body>

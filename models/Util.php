@@ -2,6 +2,8 @@
 
   class Util {
 
+    static public $invalidFields = array();
+
     static public function sanitize($input) {
       $input = trim($input);
       $input = stripslashes($input);
@@ -11,9 +13,8 @@
 
     static public function validate($input) {
       if (empty($input)) {
-        // self::redirect($_SERVER['PHP_SELF']);
-        self::redirect("../");
-        exit;
+        // self::redirect("../");exit;
+        array_push(self::$invalidFields, $input);
       } 
       return self::sanitize($input);
     }
