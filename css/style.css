@@ -76,6 +76,9 @@ tr, th, td {
   cursor: pointer;
 }
 
+.action-button {
+}
+
 .button:active, .action-button:active {
   background: black;
   color: white;
@@ -119,4 +122,8 @@ tr:hover {
 .p2 {
   padding: .5em 1.5em;
   margin: 1em 0;
+}
+
+.button__add {
+  background: lightgray;
 }

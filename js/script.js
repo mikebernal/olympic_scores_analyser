@@ -1,12 +1,8 @@
-// GLOBAL VARIABELS
-var i = 0;
-var competitors = [];
 /**
  * GET COUNTRIES
  * Invoked after DOMContentLoaded event.
  * Fetch list of countries from assets/countries.json. 
  * Converts the return object into an array for parsing.
- * Line 16 - 19 creates an option element and append it to the country select tag.
  * 
  */
 (async function () {
@@ -31,7 +27,6 @@ var competitors = [];
  * Invoked after DOMContentLoaded event.
  * Fetch list of events from assets/events.json. 
  * Converts the return object into an array for parsing.
- * Line 41 - 44 creates an option element and append it to the event select tag.
  * 
  */
 (async function () {
@@ -51,11 +46,114 @@ var competitors = [];
     .catch(function() { return console.log('Can’t access ' + events + ' response. Blocked by browser?'); })
 })();
 
-document.querySelector('.addBtn').addEventListener('click', function(e) {
+// Commence date
+$(".commence-date").datepicker({
+  onSelect: function(selected) {
+    $(".end-date").datepicker("option","minDate", selected)
+  }
+});
+
+// End-date
+$(".end-date").datepicker({ 
+  onSelect: function(selected) {
+    $(".commence-date").datepicker("option","maxDate", selected)
+  }
+});  
+
+// Initialize Global Variables
+var i = 0;
+var competitors = [];
+
+var year          = document.querySelector('.year');
+var city          = document.querySelector('.city');
+var commenceDate  = document.querySelector('.commence-date');
+var endDate       = document.querySelector('.end-date');
+
+var competitor  = document.querySelector('.competitor');
+var country     = document.querySelector('.country');
+var event       = document.querySelector('.event');
+var medal       = document.querySelector('.medal');
+var worldRecord = document.querySelector('.world-record');
+var addBtn      = document.querySelector('.button__add');
+
+// Disable Add button
+function disableAddBtn() {
+  addBtn.disabled = true;
+  addBtn.style.background = "lightgrey";
+}
+
+// Enable Add button
+function enableAddBtn() {
+  addBtn.disabled = false;
+  addBtn.style.background = "rgb(0, 128, 0)";
+}
+
+// Check if input field is empty
+function isEmpty(input) {
+  input = input.trim();
+  return (input.length === 0) ? true : false
+}
+
+// Check if year length <= 4 AND accepts only numbers
+function validateYear(year) {
+  const re = /^[0-9]{4,}$/;
+  return re.test(year) ? true : false
+}
+
+// Check if competitor name is length <= 5 AND only letters
+function validateCity(city) {
+  const re = /^[A-Z a-z]/;
+  return re.test(city) ? true : false
+}
+
+// Check if competitor name is length <= 5 AND only letters
+function validateCompetitor(competitor) {
+  const re = /^[A-Z a-z]{5,}$/;
+  return re.test(competitor) ? true : false
+}
+
+// Enable Add button if competitor fields are not empty
+function checkVal() {
+  if (
+      (isEmpty(year.value) || !validateYear(year.value)) ||
+      (isEmpty(city.value) || !validateCity(city.value)) ||
+       isEmpty(commenceDate.value) ||
+       isEmpty(endDate.value) ||
+      (isEmpty(competitor.value) || !validateCompetitor(competitor.value)) ||
+       isEmpty(country.value) ||
+       isEmpty(event.value) ||
+       isEmpty(medal.value) ||
+       isEmpty(worldRecord.value)
+  ) {
+    disableAddBtn();
+  } else {
+    enableAddBtn();
+  }
+
+}
+
+// Add competitor row into preview table
+function addRow(e) {
   e.preventDefault();
   addCompetitor(i);
   i += 1;
-})
+  disableAddBtn();
+}
+
+// DOM Event Listeners
+year.addEventListener('keyup',         checkVal);
+city.addEventListener('keyup',         checkVal);
+commenceDate.addEventListener('keyup', checkVal);
+endDate.addEventListener('keyup',      checkVal);
+
+competitor.addEventListener('keyup',   checkVal);
+country.addEventListener('change',     checkVal);
+event.addEventListener('change',       checkVal);
+medal.addEventListener('change',       checkVal);
+worldRecord.addEventListener('change', checkVal);
+addBtn.addEventListener('click',       addRow);
+
+// Update Preview Table
 function updateTable() {
   return ((competitors.length > 0)
             ? (
@@ -66,6 +164,9 @@ function updateTable() {
   );
 }
 
+/**
+ * Toggle Submit Button
+ */
 function renderSubmitBtn() {
   return ((competitors.length > 1)
             ? document.querySelector('.submit').style.display = 'block'
@@ -73,7 +174,11 @@ function renderSubmitBtn() {
   );
 }
 
-function addCompetitor(index) {
+/**
+  * @param {int} index
+  * Add Competitor details as rows in preview table.
+  */
+  function addCompetitor(index) {
   // Create and append node to DOM
   var tr           = document.createElement('TR');
   var id           = document.createElement('TD');
@@ -125,13 +230,13 @@ function addCompetitor(index) {
 
   updateTable();
   renderSubmitBtn();
-  payloadUpdate()
+  payloadUpdate();
 }
 
 // To do
 function editCompetitor(index) {
   alert('competitor\'s ID to edit: ' + index);
-  // update dom
+  // Update DOM
 }
 
 // Remove competitor on the preview table

@@ -1,10 +1,40 @@
+<?php 
+
+  include("models/Util.php");
+
+  if (isset($_POST['submit'])) {
+    session_start();
+
+    $_SESSION['year']          = Util::validate($_POST['year']);
+    $_SESSION['city']          = Util::validate($_POST['city']);
+    $_SESSION['commence-date'] = Util::validate($_POST['commence-date']);
+    $_SESSION['end-date']      = Util::validate($_POST['end-date']);
+    $_SESSION['competitors']   = $_POST['competitorList'];
+
+    // Redirect if all fields are valid
+    Util::redirect('views/result.php');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PHP Olympic Form</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <script src="https://code.jquery.com/jquery-1.12.1.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
   <div class="container">
@@ -15,7 +45,8 @@
 
     <main>
       <!-- Olympic analyzer form -->
-      <form name="olympic" method="post" action="views/result.php">
+      <form name="olympic" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+      <!-- <form name="olympic" method="post" action="views/result.php"> -->
 
         <!-- Year -->
         <label class="label" for="year">Year of Games</label> 
@@ -27,11 +58,12 @@
         
         <!-- Commence date -->
         <label class="label" for="commence-date">Commence Date</label>
-        <input name="commence-date" type="text" class="input commence-date" size="10" maxlength="10">
+        <!-- <input name="commence-date" type="text" class="input commence-date" size="10" maxlength="10"> -->
+        <input name="commence-date" type="text" class="input commence-date" size="10" maxlength="30" autocomplete="off">
         
         <!-- End date -->
         <label class="label" for="end-date">End Date</label>
-        <input name="end-date" type="text" class="input end-date" size="10" maxlength="10">
+        <input name="end-date" type="text" class="input end-date" size="10" maxlength="10" autocomplete="off">
 
         <!-- Dynamic input data -->
         <div class="competitor-data">
@@ -80,11 +112,10 @@
           </div>
 
           <!-- Add button -->
-          <div class="button unselectable addBtn">
-            <span name="add" class="button__add">Add</span>
-          </div>
+          <button name="add" class="button__add button" disabled>Add</button>
 
         </div>
+        
     </main>
 
     <!-- Preview table -->
@@ -103,17 +134,17 @@
         </tr>
       </table>
 
-      <!-- Submit button -->
-      <div class="submit">
-        <button class="button p2">Submit</button>
-      </div>
-
       <input type="hidden" name="competitorList" class="competitor-list">
 
-    </form>  
+      <!-- Submit button -->
+      <div class="submit">
+        <input type="submit" name="submit" class="button p2"/>
+      </div>
 
+    </form>  
   </div>
 
   <script src="js/script.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>
