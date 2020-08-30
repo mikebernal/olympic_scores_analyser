@@ -1,5 +1,9 @@
 ## OLYMPIC SCORES ANALYSER
 
+### Wireframe
+
+[Wireframe](https://app.moqups.com/JSeAapPCxi/view/page/ad64222d5)
+
 ### TO DO
 
 1. Tally list of countries and their total medals and types.
