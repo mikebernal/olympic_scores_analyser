@@ -179,40 +179,10 @@ function renderSubmitBtn() {
   * Add Competitor details as rows in preview table.
   */
   function addCompetitor(index) {
-  // Create and append node to DOM
-  var tr           = document.createElement('TR');
-  var id           = document.createElement('TD');
-  var name         = document.createElement('TD');
-  var country      = document.createElement('TD');
-  var event        = document.createElement('TD');
-  var medal        = document.createElement('TD');
-  var worldRecord  = document.createElement('TD');
-  var edit         = document.createElement('TD');
-  var remove       = document.createElement('TD');
-
-  name.innerHTML        = document.forms[0].elements[4].value;
-  country.innerHTML     = document.forms[0].elements[5].value;
-  event.innerHTML       = document.forms[0].elements[6].value;
-  medal.innerHTML       = document.forms[0].elements[7].value;
-  worldRecord.innerHTML = document.forms[0].elements[8].value;
-  id.innerHTML          = index;
-
-  edit.innerHTML   = `<span class="pointer unselectable action-button" onclick="editCompetitor(` + index + `)">edit</span>`;
-  remove.innerHTML = `<span class="pointer unselectable action-button" onclick="removeCompetitor(` + index + `)">delete</span>`;
-
-  var lastRow = document.querySelector('.competitors').lastChild;
-  lastRow.appendChild(tr);
-  tr.appendChild(id);
-  tr.appendChild(name);
-  tr.appendChild(country);
-  tr.appendChild(event);
-  tr.appendChild(medal);
-  tr.appendChild(worldRecord);
-  tr.classList.add('row' + index);
-  tr.appendChild(edit);
-  tr.appendChild(remove);
-
-  competitors.push({
+  // Disabled add button if competitor data already exists in comeptitors table
+  var z;
+  var newCompetitor = [];
+  newCompetitor.push({
     'id':           index,
     'name':         document.forms[0].elements[4].value,
     'country':      document.forms[0].elements[5].value,
@@ -221,16 +191,79 @@ function renderSubmitBtn() {
     'world-record': document.forms[0].elements[8].value
   });
 
-  // Reset competitor's input fields
-  document.forms[0].elements[4].value = '';
-  document.forms[0].elements[5].value = '';
-  document.forms[0].elements[6].value = '';
-  document.forms[0].elements[7].value = '';
-  document.forms[0].elements[8].value = '';
+  // console.log(newCompetitor[0].name);
+  var alreadyExistsInArray = competitors.find(competitor => 
+    competitor.name    === newCompetitor[0].name &&
+    competitor.country === newCompetitor[0].country &&
+    competitor.event   === newCompetitor[0].event
+  );
+  
+  console.log(alreadyExistsInArray);
 
-  updateTable();
-  renderSubmitBtn();
-  payloadUpdate();
+  if (alreadyExistsInArray) {
+    alert("Competitor data already exists in preview table!");
+    // Reset competitor's input fields
+    document.forms[0].elements[4].value = '';
+    document.forms[0].elements[5].value = '';
+    document.forms[0].elements[6].value = '';
+    document.forms[0].elements[7].value = '';
+    document.forms[0].elements[8].value = '';
+    renderSubmitBtn();
+  } else {
+    // Create and append node to DOM
+    var tr           = document.createElement('TR');
+    var id           = document.createElement('TD');
+    var name         = document.createElement('TD');
+    var country      = document.createElement('TD');
+    var event        = document.createElement('TD');
+    var medal        = document.createElement('TD');
+    var worldRecord  = document.createElement('TD');
+    var edit         = document.createElement('TD');
+    var remove       = document.createElement('TD');
+
+    name.innerHTML        = document.forms[0].elements[4].value;
+    country.innerHTML     = document.forms[0].elements[5].value;
+    event.innerHTML       = document.forms[0].elements[6].value;
+    medal.innerHTML       = document.forms[0].elements[7].value;
+    worldRecord.innerHTML = document.forms[0].elements[8].value;
+    id.innerHTML          = index;
+
+    edit.innerHTML   = `<span class="pointer unselectable action-button" onclick="editCompetitor(` + index + `)">edit</span>`;
+    remove.innerHTML = `<span class="pointer unselectable action-button" onclick="removeCompetitor(` + index + `)">delete</span>`;
+
+    var lastRow = document.querySelector('.competitors').lastChild;
+    lastRow.appendChild(tr);
+    tr.appendChild(id);
+    tr.appendChild(name);
+    tr.appendChild(country);
+    tr.appendChild(event);
+    tr.appendChild(medal);
+    tr.appendChild(worldRecord);
+    tr.classList.add('row' + index);
+    tr.appendChild(edit);
+    tr.appendChild(remove);
+
+    competitors.push({
+      'id':           index,
+      'name':         document.forms[0].elements[4].value,
+      'country':      document.forms[0].elements[5].value,
+      'event':        document.forms[0].elements[6].value,
+      'medal':        document.forms[0].elements[7].value,
+      'world-record': document.forms[0].elements[8].value
+    });
+
+    // Reset competitor's input fields
+    document.forms[0].elements[4].value = '';
+    document.forms[0].elements[5].value = '';
+    document.forms[0].elements[6].value = '';
+    document.forms[0].elements[7].value = '';
+    document.forms[0].elements[8].value = '';
+
+    updateTable();
+    renderSubmitBtn();
+    payloadUpdate();
+  }
+ 
 }
 
 // To do
