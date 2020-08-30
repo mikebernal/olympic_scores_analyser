@@ -4,18 +4,7 @@
   include("../models/Util.php");
 
   // Validate input fields
-  $year         = $_SESSION["year"];
-  $city         = $_SESSION["city"];
-  $commenceDate = $_SESSION["commence-date"];
-  $endDate      = $_SESSION["end-date"];
   $competitors  = json_decode($_SESSION["competitors"], true);
-
-  foreach($competitors as $competitor) {
-    $competitor['name'];
-    $competitor['country'];
-    $competitor['medal'];
-    $competitor['world-record'];
-  }
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +26,7 @@
   <div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
-        <div class="back-button"><a href="../index.php">Back</a></div>
+        <div class="back-button"><a href="../index.php">Back</a></div><br>
         <h1>Competitors</h1>
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">
@@ -58,7 +47,7 @@
 							<tbody>
               <?php
                 foreach($competitors as $competitor) {
-                  echo "<tr clas=''>";
+                  echo "<tr>";
                   echo "<td class='column1'>" . $competitor['name']         . "</td>";
                   echo "<td class='column2'>" . $competitor['country']      . "</td>";
                   echo "<td class='column3'>" . $competitor['medal']        . "</td>";
