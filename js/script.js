@@ -180,7 +180,6 @@ function renderSubmitBtn() {
   */
   function addCompetitor(index) {
   // Disabled add button if competitor data already exists in comeptitors table
-  var z;
   var newCompetitor = [];
   newCompetitor.push({
     'id':           index,
@@ -191,14 +190,12 @@ function renderSubmitBtn() {
     'world-record': document.forms[0].elements[8].value
   });
 
-  // console.log(newCompetitor[0].name);
+  // Check if incoming data already exists in preview table
   var alreadyExistsInArray = competitors.find(competitor => 
     competitor.name    === newCompetitor[0].name &&
     competitor.country === newCompetitor[0].country &&
     competitor.event   === newCompetitor[0].event
   );
-  
-  console.log(alreadyExistsInArray);
 
   if (alreadyExistsInArray) {
     alert("Competitor data already exists in preview table!");
