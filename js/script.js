@@ -182,7 +182,12 @@ function renderSubmitBtn() {
   // Disabled add button if competitor data already exists in comeptitors table
   var newCompetitor = [];
   newCompetitor.push({
-    'id':           index,
+    'id':            index,
+    'year':          document.forms[0].elements[0].value,
+    'city':          document.forms[0].elements[1].value,
+    'commence-date': document.forms[0].elements[2].value,
+    'end-date':      document.forms[0].elements[3].value,
+
     'name':         document.forms[0].elements[4].value,
     'country':      document.forms[0].elements[5].value,
     'event':        document.forms[0].elements[6].value,
@@ -192,6 +197,7 @@ function renderSubmitBtn() {
 
   // Check if incoming data already exists in preview table
   var alreadyExistsInArray = competitors.find(competitor => 
+    competitor.year    === newCompetitor[0].year &&
     competitor.name    === newCompetitor[0].name &&
     competitor.country === newCompetitor[0].country &&
     competitor.event   === newCompetitor[0].event
@@ -242,6 +248,12 @@ function renderSubmitBtn() {
 
     competitors.push({
       'id':           index,
+
+      'year':          document.forms[0].elements[0].value,
+      'city':          document.forms[0].elements[1].value,
+      'commence-date': document.forms[0].elements[2].value,
+      'end-date':      document.forms[0].elements[3].value,
+
       'name':         document.forms[0].elements[4].value,
       'country':      document.forms[0].elements[5].value,
       'event':        document.forms[0].elements[6].value,
@@ -287,5 +299,5 @@ function removeCompetitor(index) {
 function payloadUpdate() {
   var payloadRequest = document.querySelector('.competitor-list');
   payloadRequest.value = JSON.stringify(competitors);
-  // console.log(payloadRequest.value);
+  console.log(payloadRequest.value);
 }
