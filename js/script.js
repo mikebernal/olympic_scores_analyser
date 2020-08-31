@@ -104,13 +104,17 @@ var addBtn      = document.querySelector('.button__add');
 // Disable Add button
 function disableAddBtn() {
   addBtn.disabled = true;
-  addBtn.style.background = "lightgrey";
+  addBtn.classList.remove("btn-success");
+  addBtn.classList.add("btn-light");
+  addBtn.style.cursor = "default";
 }
 
 // Enable Add button
 function enableAddBtn() {
   addBtn.disabled = false;
-  addBtn.style.background = "rgb(0, 128, 0)";
+  addBtn.classList.remove("btn-light");
+  addBtn.classList.add("btn-success");
+  addBtn.style.cursor = "pointer";
 }
 
 // Check if input field is empty
@@ -158,8 +162,8 @@ function checkVal() {
 }
 
 // Add competitor row into preview table
-function addRow(e) {
-  e.preventDefault();
+function addRow() {
+  
   addCompetitor(i);
   i += 1;
   disableAddBtn();
@@ -229,7 +233,7 @@ function renderSubmitBtn() {
   );
 
   if (alreadyExistsInArray) {
-    alert("Competitor data already exists in preview table!");
+    // alert("Competitor data already exists in preview table!");
     // Reset competitor's input fields
     document.forms[0].elements[4].value = '';
     document.forms[0].elements[5].value = '';
@@ -256,10 +260,12 @@ function renderSubmitBtn() {
     worldRecord.innerHTML = document.forms[0].elements[8].value;
     id.innerHTML          = index;
 
-    edit.innerHTML   = `<span class="pointer unselectable action-button" onclick="editCompetitor(` + index + `)">edit</span>`;
-    remove.innerHTML = `<span class="pointer unselectable action-button" onclick="removeCompetitor(` + index + `)">delete</span>`;
+    // <button type="button" class="btn btn-warning">Warning</button>
+    edit.innerHTML   = `<button type="button" class="btn btn-warning unselectable" onclick="editCompetitor(` + index + `)">edit</button>`;
+    remove.innerHTML = `<button type="button" class="btn btn-danger pointer unselectable" onclick="removeCompetitor(` + index + `)">delete</button>`;
 
     var lastRow = document.querySelector('.competitors').lastChild;
+    console.log(lastRow);
     lastRow.appendChild(tr);
     tr.appendChild(id);
     tr.appendChild(name);
@@ -302,7 +308,7 @@ function renderSubmitBtn() {
 
 // To do
 function editCompetitor(index) {
-  alert('competitor\'s ID to edit: ' + index);
+  alert('Competitor\'s ID to edit: ' + index);
   // Update DOM
 }
 
