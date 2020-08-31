@@ -61,24 +61,17 @@
   //   'bronze'  => 0
   // ]);
 
-	// $sortedCountries array
-  // Check if competitor[country] exists in sortedCountries
-  function checkCountry($array, $key, $val) {
-
-  }
-
-  // $sortedCountries
+  // $sortCountries
   foreach($competitors as $competitor) {
-    // echo "<pre>";print_r($competitor);echo "</pre>";
-    // echo "===========================================";
 
     if (empty($sortedCountries)) {
       // Init empty array by pushing first element
       array_push($sortedCountries, [
-				'country' => $competitor['country'],
-				'gold'    => checkGold($competitor['medal']),
-				'silver'  => checkSilver($competitor['medal']),
-				'bronze'  => checkBronze($competitor['medal'])
+				'country'      => $competitor['country'],
+				'gold'         => checkGold($competitor['medal']),
+				'silver'       => checkSilver($competitor['medal']),
+        'bronze'       => checkBronze($competitor['medal']),
+        'total-medals' => countMedals(checkGold($competitor['medal']), checkSilver($competitor['medal']), checkBronze($competitor['medal']))
       ]);
     } else {
       $allCountries  = array_column($sortedCountries, 'country');
@@ -88,9 +81,11 @@
         $existingCountryIndex = array_search($competitor['country'], $allCountries);
         $sortedCountries[$existingCountryIndex] = array_merge($sortedCountries[$existingCountryIndex], [
           'country' => $competitor['country'],
-          'gold'    => 99,
-          'silver'  => 99,
-          'bronze'  => 99
+          'gold'    => ( checkGold($competitor['medal']) + (int)$sortedCountries[$existingCountryIndex]['gold'] ),
+          'silver'  => ( checkSilver($competitor['medal']) + (int)$sortedCountries[$existingCountryIndex]['silver'] ),
+          'bronze'  => ( checkBronze($competitor['medal']) + (int)$sortedCountries[$existingCountryIndex]['bronze'] ),
+          'total-medals' => $sortedCountries[$existingCountryIndex]['total-medals'] += countMedals(checkGold($competitor['medal']), checkSilver($competitor['medal']), checkBronze($competitor['medal']))
+
         ]);
         
       } else {
@@ -99,17 +94,23 @@
           'country' => $competitor['country'],
           'gold'    => checkGold($competitor['medal']),
           'silver'  => checkSilver($competitor['medal']),
-          'bronze'  => checkBronze($competitor['medal'])
+          'bronze'  => checkBronze($competitor['medal']),
+          'total-medals' => countMedals(checkGold($competitor['medal']), checkSilver($competitor['medal']), checkBronze($competitor['medal']))
+
         ]);
       }
 
     }
-
   }
 
-    echo "<pre>";print_r($sortedCountries);echo "</pre>";
+  function sortByMedals($x, $y) {
+    // Rearrange countries based from their number of medals
+    if($x['total-medals'] == $y['total-medals']) {
+      return 0;
+    }
 
+    return $x['total-medals'] < $y['total-medals'];
+  }
 
-
-
+  echo "<pre>";print_r($sortedCountries);echo "</pre>";
 ?>

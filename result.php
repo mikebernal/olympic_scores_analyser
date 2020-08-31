@@ -27,18 +27,19 @@
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-              <!-- <?php
+							<?php
+								usort($sortedCountries, 'sortByMedals');
                 foreach($sortedCountries as $country) {
                   echo "<tr>";
                   echo "<td class='column1'>" . $country['country']         . "</td>";
                   echo "<td class='column2'>" . $country['gold']      . "</td>";
                   echo "<td class='column3'>" . $country['silver']        . "</td>";
                   echo "<td class='column4'>" . $country['bronze'] . "</td>";
-                  echo "<td class='column5'>" . $country['total-medal'] . "</td>";
+                  echo "<td class='column5'>" . $country['total-medals'] . "</td>";
                   echo "<td class='column6'>" . "X" . "</td>";
                   echo "</tr>";
                 }
-              ?> -->
+              ?>
 							</tbody>
 						</table>
 					</div>

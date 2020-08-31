@@ -75,10 +75,11 @@
     if (empty($sortedCountries)) {
       // Init empty array by pushing first element
       array_push($sortedCountries, [
-				'country' => $competitor['country'],
-				'gold'    => checkGold($competitor['medal']),
-				'silver'  => checkSilver($competitor['medal']),
-				'bronze'  => checkBronze($competitor['medal'])
+				'country'      => $competitor['country'],
+				'gold'         => checkGold($competitor['medal']),
+				'silver'       => checkSilver($competitor['medal']),
+        'bronze'       => checkBronze($competitor['medal']),
+        'total-medals' => countMedals(checkGold($competitor['medal']), checkSilver($competitor['medal']), checkBronze($competitor['medal']))
       ]);
     } else {
       $allCountries  = array_column($sortedCountries, 'country');
@@ -86,13 +87,14 @@
       if ($countryExists) {
         // Array splice()
         $existingCountryIndex = array_search($competitor['country'], $allCountries);
-        array_splice($sortedCountries[$existingCountryIndex], 0, 4, [ 
+        $sortedCountries[$existingCountryIndex] = array_merge($sortedCountries[$existingCountryIndex], [
           'country' => $competitor['country'],
-          'gold'    => 99,
-          'silver'  => 99,
-          'bronze'  => 99
+          'gold'    => ( checkGold($competitor['medal']) + (int)$sortedCountries[$existingCountryIndex]['gold'] ),
+          'silver'  => ( checkSilver($competitor['medal']) + (int)$sortedCountries[$existingCountryIndex]['silver'] ),
+          'bronze'  => ( checkBronze($competitor['medal']) + (int)$sortedCountries[$existingCountryIndex]['bronze'] ),
+          'total-medals' => $sortedCountries[$existingCountryIndex]['total-medals'] += countMedals(checkGold($competitor['medal']), checkSilver($competitor['medal']), checkBronze($competitor['medal']))
+
         ]);
-        // print_r($sortedCountries[$existingCountryIndex]);
         
       } else {
         // Array push()
@@ -100,7 +102,9 @@
           'country' => $competitor['country'],
           'gold'    => checkGold($competitor['medal']),
           'silver'  => checkSilver($competitor['medal']),
-          'bronze'  => checkBronze($competitor['medal'])
+          'bronze'  => checkBronze($competitor['medal']),
+          'total-medals' => countMedals(checkGold($competitor['medal']), checkSilver($competitor['medal']), checkBronze($competitor['medal']))
+
         ]);
       }
 
