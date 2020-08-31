@@ -6,10 +6,9 @@
 
 ### TO DO
 
-1. Tally list of countries and their total medals and types.
-2. Display countries in ascending order.
-3. Display countries that has exact same medal count and type.
-4. Display all athletes who have set a world record including their sports. 
+1. Display countries same rank that has exact same medal count and type.
+2. Fixed results page table data padding.
+3. Use Bootstraps table style for results page.
 
 ### Version 1
 
@@ -19,7 +18,7 @@
 
 ### Version 2
 
-1. Migrate code into React
+1. Migrate code into React or AngularJS
 2. Use CSS Library
 
 ##### Author: Mike Bernal
