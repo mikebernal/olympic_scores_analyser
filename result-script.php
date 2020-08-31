@@ -73,6 +73,7 @@
     // echo "===========================================";
 
     if (empty($sortedCountries)) {
+      // Init empty array by pushing first element
       array_push($sortedCountries, [
 				'country' => $competitor['country'],
 				'gold'    => checkGold($competitor['medal']),
@@ -80,22 +81,25 @@
 				'bronze'  => checkBronze($competitor['medal'])
       ]);
     } else {
-      $allCountries = array_column($sortedCountries, 'country');
-      if (in_array($competitor['country'], $allCountries)) {
+      $allCountries  = array_column($sortedCountries, 'country');
+      $countryExists = in_array($competitor['country'], $allCountries);
+      if ($countryExists) {
         // Array splice()
-        array_replace($sortedCountries, [ 
-          'country'      => $competitor['country'],
-          'gold'         => 99,
-          'silver'       => 99,
-          'bronze'       => 99
+        $existingCountryIndex = array_search($competitor['country'], $allCountries);
+        $sortedCountries[$existingCountryIndex] = array_merge($sortedCountries[$existingCountryIndex], [
+          'country' => $competitor['country'],
+          'gold'    => 99,
+          'silver'  => 99,
+          'bronze'  => 99
         ]);
+        
       } else {
         // Array push()
         array_push($sortedCountries, [
-          'country'      => $competitor['country'],
-          'gold'         => checkGold($competitor['medal']),
-          'silver'       => checkSilver($competitor['medal']),
-          'bronze'       => checkBronze($competitor['medal'])
+          'country' => $competitor['country'],
+          'gold'    => checkGold($competitor['medal']),
+          'silver'  => checkSilver($competitor['medal']),
+          'bronze'  => checkBronze($competitor['medal'])
         ]);
       }
 

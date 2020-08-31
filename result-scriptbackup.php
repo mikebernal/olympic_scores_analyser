@@ -52,26 +52,92 @@
 		$count = 0;
 		$count = $count + $gold + $silver + $bronze;
 		return $count;
-	}
+  }
+
+  // array_push($sortedCountries, [
+  //   'country' => 'Australia',
+  //   'gold'    => 1,
+  //   'silver'  => 0,
+  //   'bronze'  => 0
+  // ]);
 
 	// $sortedCountries array
-	foreach($competitors as $competitor) {
-		// Add competitor to $sortedCountries array if the competitors' country  does not exists yet
-		if (!in_array($competitor['country'], $sortedCountries)) {
-			array_push($sortedCountries, [
-				'country'      => $competitor['country'],
-				'gold'         => checkGold($competitor['medal']),
-				'silver'       => checkSilver($competitor['medal']),
-				'bronze'       => checkBronze($competitor['medal']),
-				'total-medal'  => countMedals(checkGold($competitor['medal']), checkSilver($competitor['medal']), checkBronze($competitor['medal']))
-			]);
-	?>
+  // Check if competitor[country] exists in sortedCountries
+  function checkCountry($array, $key, $val) {
 
-		<?php
-		} else {
-			// If competitors' country already exists in $sortedCountries UPDATE medals
-      
-		}
-	}
-?>
+  }
+
+  // $sortedCountries
+  foreach($competitors as $competitor) {
     // echo "<pre>";print_r($competitor);echo "</pre>";
+    // echo "===========================================";
+
+    if (empty($sortedCountries)) {
+      // Init empty array by pushing first element
+      array_push($sortedCountries, [
+				'country' => $competitor['country'],
+				'gold'    => checkGold($competitor['medal']),
+				'silver'  => checkSilver($competitor['medal']),
+				'bronze'  => checkBronze($competitor['medal'])
+      ]);
+    } else {
+      $allCountries  = array_column($sortedCountries, 'country');
+      $countryExists = in_array($competitor['country'], $allCountries);
+      if ($countryExists) {
+        // Array splice()
+        $existingCountryIndex = array_search($competitor['country'], $allCountries);
+        array_splice($sortedCountries[$existingCountryIndex], 0, 4, [ 
+          'country' => $competitor['country'],
+          'gold'    => 99,
+          'silver'  => 99,
+          'bronze'  => 99
+        ]);
+        // print_r($sortedCountries[$existingCountryIndex]);
+        
+      } else {
+        // Array push()
+        array_push($sortedCountries, [
+          'country' => $competitor['country'],
+          'gold'    => checkGold($competitor['medal']),
+          'silver'  => checkSilver($competitor['medal']),
+          'bronze'  => checkBronze($competitor['medal'])
+        ]);
+      }
+
+    }
+
+  }
+
+    echo "<pre>";print_r($sortedCountries);echo "</pre>";
+
+
+
+
+?>
+
+		<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$a1 = array(
+	"a" => "red",
+    "b" => "green",
+    "c" => "blue",
+    "d" => "yellow"
+);
+
+$a2 = array(
+	"a" => "purple",
+    "b" => "orange"
+);
+
+array_splice($a1, 0, 1, [
+	"a" => "salmonela",
+]);
+
+print_r($a1);
+?>
+
+</body>
+</html>
