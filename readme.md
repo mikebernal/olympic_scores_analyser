@@ -7,8 +7,7 @@
 ### TO DO
 
 1. Display countries same rank that has exact same medal count and type.
-2. Fixed results page table data padding.
-3. Use Bootstraps table style for results page.
+2. Use Bootstraps table style for results page.
 
 ### Version 1
 

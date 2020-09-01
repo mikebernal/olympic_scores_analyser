@@ -1,10 +1,14 @@
 <?php
-
+  /**
+   * Initialize variables
+   */
   $competitors     = json_decode($_SESSION["competitors"], true);
 	$sortedCountries = array();
 	$worldRecord     = array();
 
-	// $worldRecord array
+	/**
+   * Initialize wordRecord array
+   */
 	foreach($competitors as $competitor) {
 		if ($competitor['world-record'] === 'Yes') {
 			array_push($worldRecord, [
@@ -14,7 +18,12 @@
 		}
 	}
 
-  // Count Gold medal
+  /**
+   * checkGold function
+   *
+   * @param [string] $medal
+   * @return 1 || 0
+   */
 	function checkGold($medal) {
 		$count = 0;
 		if ($medal === 'Gold') {
@@ -25,7 +34,12 @@
 		}
 	}
 
-  // Count Silver Medal
+  /**
+   * checkSilver function
+   *
+   * @param [string] $medal
+   * @return 1 || 0
+   */
 	function checkSilver($medal) {
 		$count = 0;
 		if ($medal === 'Silver') {
@@ -36,7 +50,12 @@
 		}
 	}
 
-  // Count Bronze Medal
+  /**
+   * checkBronze function
+   *
+   * @param [string] $medal
+   * @return 1 || 0
+   */
 	function checkBronze($medal) {
 		$count = 0;
 		if ($medal === 'Bronze') {
@@ -47,25 +66,30 @@
 		}
 	}
 
-  // Cound total num of medals
+  /**
+   * countMedals function
+   *
+   * @param (int)[string] $gold
+   * @param (int)[string] $silver
+   * @param (int)[string] $bronze
+   * @return summation of all medals
+   */
 	function countMedals($gold, $silver, $bronze) {
 		$count = 0;
 		$count = $count + $gold + $silver + $bronze;
 		return $count;
   }
 
-  // array_push($sortedCountries, [
-  //   'country' => 'Australia',
-  //   'gold'    => 1,
-  //   'silver'  => 0,
-  //   'bronze'  => 0
-  // ]);
-
-  // $sortCountries
+  /**
+   * Initialize sortCountries array
+   * 1. Add country if array is empty
+   * 2. Override country values if country already exists
+   * 3. Add country if it does not exists in array
+   */
   foreach($competitors as $competitor) {
 
     if (empty($sortedCountries)) {
-      // Init empty array by pushing first element
+      // 1. Add country if array is empty
       array_push($sortedCountries, [
 				'country'      => $competitor['country'],
 				'gold'         => checkGold($competitor['medal']),
@@ -77,7 +101,7 @@
       $allCountries  = array_column($sortedCountries, 'country');
       $countryExists = in_array($competitor['country'], $allCountries);
       if ($countryExists) {
-        // Array splice()
+        // 2. Override existing country values
         $existingCountryIndex = array_search($competitor['country'], $allCountries);
         $sortedCountries[$existingCountryIndex] = array_merge($sortedCountries[$existingCountryIndex], [
           'country' => $competitor['country'],
@@ -89,7 +113,7 @@
         ]);
         
       } else {
-        // Array push()
+        // 3. Add country 
         array_push($sortedCountries, [
           'country' => $competitor['country'],
           'gold'    => checkGold($competitor['medal']),
@@ -103,6 +127,15 @@
     }
   }
 
+  /**
+   * sortByMedals
+   * 
+   * 1. Sort country tables based from num of medals
+   *
+   * @param [type] $x
+   * @param [type] $y
+   * @return void
+   */
   function sortByMedals($x, $y) {
     // Rearrange countries based from their number of medals
     if($x['total-medals'] == $y['total-medals']) {
@@ -112,5 +145,22 @@
     return $x['total-medals'] < $y['total-medals'];
   }
 
-  echo "<pre>";print_r($sortedCountries);echo "</pre>";
+ /**
+  * Debugging purposes only
+  */
+
+  $ordered_values = $sortedCountries;
+  rsort($ordered_values);
+  foreach ($sortedCountries as $key => $value) {
+    foreach ($ordered_values as $ordered_key => $ordered_value) {
+      if ($value['total-medals'] > $ordered_value['total-medals']) {
+        $key = $ordered_key;
+        break;
+      }
+    }
+
+    echo $value['country'] . '- Rank: ' . ((int) $key + 1) . '<br/>';
+  }
+
+  // echo "<pre>";print_r($sortedCountries);echo "</pre>";
 ?>

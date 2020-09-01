@@ -4,21 +4,21 @@
 	include_once('result-script.php'); 
 ?>
 		<!-- Competitors -->
-		<div class="container-table100">
+		<div>
 			<div class="wrap-table100">
         <div class="back-button"><a href="index.php">Back</a></div><br>
         <h1>Competitors</h1><br>
-				<div class="table100 ver1 m-b-110">
+				<div class="table100 ver1 m-b-110 table">
 					<div class="table100-head">
 						<table>
 							<thead>
-								<tr class="row100 head">
+								<tr >
 									<th class="cell100 column1">Country</th>
 									<th class="cell100 column2">Gold</th>
-									<th class="cell100 column2">Silver</th>
-									<th class="cell100 column2">Bronze</th>
-									<th class="cell100 column3">Total Medals</th>
-									<th class="cell100 column4">Rank</th>
+									<th class="cell100 column3">Silver</th>
+									<th class="cell100 column4">Bronze</th>
+									<th class="cell100 column5">Total Medals</th>
+									<th class="cell100 column6">Rank</th>
 								</tr>
 							</thead>
 						</table>
@@ -50,7 +50,7 @@
 		<!-- World Record -->
 		<!-- Display world record table if a world record row exists -->
 		<?php if (count($worldRecord)) {	?>
-		<div class="container-table100">
+		<div>
 			<div class="wrap-table100">
         <h1>World Record</h1><br>
 				<div class="table100 ver1 m-b-110">

@@ -1,4 +1,10 @@
-// jQuery
+/**
+ * PUT SCRIPTS HERE THAT NEEDS TO RUN BEFORE DOMContentLoaded event.
+ */
+
+/**
+ * Import jQuery
+ */
 (function ($) {
 	"use strict";
 	$('.column100').on('mouseover',function(){
@@ -27,7 +33,6 @@
  * GET COUNTRIES
  * Invoked after DOMContentLoaded event.
  * Fetch list of countries from assets/countries.json. 
- * Converts the return object into an array for parsing.
  * 
  */
 (async function () {
@@ -51,7 +56,6 @@
  * GET EVENTS
  * Invoked after DOMContentLoaded event.
  * Fetch list of events from assets/events.json. 
- * Converts the return object into an array for parsing.
  * 
  */
 (async function () {
@@ -71,14 +75,18 @@
     .catch(function() { return console.log('Can’t access ' + events + ' response. Blocked by browser?'); })
 })();
 
-// Commence date
+/**
+ * Initialize commence date date picker ui
+ */
 $(".commence-date").datepicker({
   onSelect: function(selected) {
     $(".end-date").datepicker("option","minDate", selected)
   }
 });
 
-// End-date
+/**
+ * Initialize end date date picker ui
+ */
 $(".end-date").datepicker({ 
   onSelect: function(selected) {
     $(".commence-date").datepicker("option","maxDate", selected)
@@ -141,7 +149,9 @@ function validateCompetitor(competitor) {
   return re.test(competitor) ? true : false
 }
 
-// Enable Add button if competitor fields are not empty
+/**
+ * Enable Add button if competitor fields are not empty
+ */ 
 function checkVal() {
   if (
       (isEmpty(year.value) || !validateYear(year.value)) ||
@@ -161,7 +171,9 @@ function checkVal() {
 
 }
 
-// Add competitor row into preview table
+/**
+ * Add competitor row into preview table
+ */
 function addRow() {
   
   addCompetitor(i);
@@ -169,7 +181,9 @@ function addRow() {
   disableAddBtn();
 }
 
-// DOM Event Listeners
+/**
+ * DOM event listeners
+ */
 year.addEventListener('keyup',         checkVal);
 city.addEventListener('keyup',         checkVal);
 commenceDate.addEventListener('keyup', checkVal);
@@ -182,7 +196,9 @@ medal.addEventListener('change',       checkVal);
 worldRecord.addEventListener('change', checkVal);
 addBtn.addEventListener('click',       addRow);
 
-// Update Preview Table
+/**
+ * Update preview table
+ */
 function updateTable() {
   return ((competitors.length > 0)
             ? (
@@ -260,7 +276,6 @@ function renderSubmitBtn() {
     worldRecord.innerHTML = document.forms[0].elements[8].value;
     id.innerHTML          = index;
 
-    // <button type="button" class="btn btn-warning">Warning</button>
     edit.innerHTML   = `<button type="button" class="btn btn-warning unselectable" onclick="editCompetitor(` + index + `)">edit</button>`;
     remove.innerHTML = `<button type="button" class="btn btn-danger pointer unselectable" onclick="removeCompetitor(` + index + `)">delete</button>`;
 
@@ -292,7 +307,9 @@ function renderSubmitBtn() {
       'world-record': document.forms[0].elements[8].value
     });
 
-    // Reset competitor's input fields
+    /**
+     * Reset competitor's input fields
+     */ 
     document.forms[0].elements[4].value = '';
     document.forms[0].elements[5].value = '';
     document.forms[0].elements[6].value = '';
@@ -309,17 +326,19 @@ function renderSubmitBtn() {
 // To do
 function editCompetitor(index) {
   alert('Competitor\'s ID to edit: ' + index);
-  // Update DOM
+  // Update DOM here
 }
 
-// Remove competitor on the preview table
+/**
+ *  Remove competitor on the preview table
+ */
 function removeCompetitor(index) {
   // splice element in competitors array
   competitors.forEach(function (competitor)  {
     (competitor.id === (index)) && competitors.splice(competitors.indexOf(competitor), 1)
   });
 
-  // Update DOM
+  // Update DOM here
   var rowToRemove = document.querySelector('.row' + index.toString());
   rowToRemove.remove();
   updateTable();
@@ -327,6 +346,10 @@ function removeCompetitor(index) {
   payloadUpdate()
 }
 
+/**
+ * Update Http request here
+ * Converts obj to string for http consumption
+ */
 function payloadUpdate() {
   var payloadRequest = document.querySelector('.competitor-list');
   payloadRequest.value = JSON.stringify(competitors);
