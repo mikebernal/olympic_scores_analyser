@@ -145,21 +145,42 @@
     return $x['total-medals'] < $y['total-medals'];
   }
 
- /**
-  * Debugging purposes only
-  */
-
-  $ordered_values = $sortedCountries;
-  rsort($ordered_values);
-  foreach ($sortedCountries as $key => $value) {
-    foreach ($ordered_values as $ordered_key => $ordered_value) {
-      if ($value['total-medals'] > $ordered_value['total-medals']) {
-        $key = $ordered_key;
-        break;
+  /**
+    * ================================================================================================
+    * ================================================================================================
+    * ====================================== Debugging purposes only =================================
+    * ================================================================================================
+    * ================================================================================================
+    */
+  
+   /**
+    * getRank function
+    * Ref: https://php.developreference.com/article/21057501/Ranking+Position+on+value+of+array+in+PHP
+    * 
+    * @param [type] $x
+    * @param [type] $y
+    * @return void
+    */
+  function getRank($country) {
+    global $sortedCountries;
+    $ordered_values = $sortedCountries;
+    rsort($ordered_values);
+    foreach ($sortedCountries as $key => $value) {
+      foreach ($ordered_values as $ordered_key => $ordered_value) {
+        if ($value['total-medals'] > $ordered_value['total-medals']) {
+          $key = $ordered_key;
+          break;
+        }
       }
-    }
 
-    echo $value['country'] . '- Rank: ' . ((int) $key + 1) . '<br/>';
+      if ($country == $value['country']) {
+        return ((int) $key + 1);
+      }
+  
+      // echo $value['country'] . '- Rank: ' . ((int) $key + 1) . '<br/>';
+      // 1. Pass country name
+      // 2. return rank
+    }
   }
 
   // echo "<pre>";print_r($sortedCountries);echo "</pre>";

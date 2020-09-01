@@ -30,15 +30,16 @@
 							<?php
 								usort($sortedCountries, 'sortByMedals');
                 foreach($sortedCountries as $country) {
-                  echo "<tr>";
-                  echo "<td class='column1'>" . $country['country']         . "</td>";
-                  echo "<td class='column2'>" . $country['gold']      . "</td>";
-                  echo "<td class='column3'>" . $country['silver']        . "</td>";
-                  echo "<td class='column4'>" . $country['bronze'] . "</td>";
-                  echo "<td class='column5'>" . $country['total-medals'] . "</td>";
-                  echo "<td class='column6'>" . "X" . "</td>";
-                  echo "</tr>";
-                }
+							?>
+                <tr>
+									<td class='column1'><?php echo $country['country']; ?></td>
+									<td class='column2'><?php echo $country['gold']; ?></td>
+									<td class='column3'><?php echo $country['silver']; ?></td>
+									<td class='column4'><?php echo $country['bronze']; ?></td>
+									<td class='column5'><?php echo $country['total-medals']; ?></td>
+									<td class='column6'><?php echo getRank($country['country']); ?></td>
+								</tr>
+              <?php }
               ?>
 							</tbody>
 						</table>
@@ -48,7 +49,7 @@
 		</div>
 
 		<!-- World Record -->
-		<!-- Display world record table if a world record row exists -->
+		<!-- Display world record table if row exists -->
 		<?php if (count($worldRecord)) {	?>
 		<div>
 			<div class="wrap-table100">
@@ -68,14 +69,12 @@
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-							<?php
-								foreach($worldRecord as $record) {
-									echo "<tr>";
-									echo "<td class='column1'>" . $record['athletes'] . "</td>";
-									echo "<td class='column2'>" . $record['event']    . "</td>";
-									echo "</tr>";
-								}
-							?>
+							<?php foreach($worldRecord as $record) { ?>
+								<tr>
+							  	<td class='column1'><?php echo $record['athletes']; ?></td>
+									<td class='column2'><?php echo $record['event']; ?></td>
+								</tr>
+							<?php } ?>
 							</tbody>
 						</table>
 
@@ -86,3 +85,4 @@
 		<?php	} ?>
 
 <?php include('includes/footer.php');?>
+								
